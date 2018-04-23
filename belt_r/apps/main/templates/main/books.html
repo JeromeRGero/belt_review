@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	{% load static %}
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}" media="screen" title="no title"  charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $("document").ready(function(){
+            $("document").on("click", ".del_button", function(){
+                $(this.form).slideUp("slow", function(){})
+            })
+        })
+
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+        <h1 style="text-align: center; border: 1px solid lightgray">Hello {{name}}</h1>
+        <p><a href="/books/add">Add Book and Review</a><a href="/logout" style="float: right;">Logout</a></p>
+        <h3 style="padding-top: 20px;">Your Recent Reviews:</h3>
+        <div id="user_recent_reviews">
+            {% if this_users_reviews %}
+                <table id="userdash_reviews">
+                    {% for review in this_users_reviews %}
+                    <tr>
+                        <td>
+                            Book: 
+                        </td>
+                        <td>
+                            <a href="/books/{{review.book.id}}">{{review.book.title}}</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Author: 
+                        </td>
+                        <td>
+                            {{review.author.name}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Your Review: 
+                        </td>
+                        <td>
+                            {{review.review}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Stars: 
+                        </td>
+                        <td>
+                            {{review.stars}}
+                        </td>
+                    </tr>
+                    <form method="POST" name="{{review.id}}">
+                            {% csrf_token %}
+                        <tr>
+                            <td>
+                                <span class="make_small">option:</span>
+                            </td>
+                            <td>
+                                <input type="hidden" name="delete_val" value="{{review.id}}}">
+                                <p class="del_button"></p>
+                                <input type="submit" value="Delete" class="del_button">
+                            </td>
+                        </tr>
+                    </form> 
+                    {% endfor %}
+                </table>
+            {% endif %}
+        </div>
+        <br>
+        <div id="othe_books">
+            <h1>Other Recent Reviews:</h1>
+                {% if not_this_users_reviews %}
+                <table id="userdash_non-reviews">
+                    {% for review in not_this_users_reviews %}
+                    <tr>
+                        <td>
+                            Book: 
+                        </td>
+                        <td>
+                            <a href="/books/{{review.book.id}}">{{review.book.title}}</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Your Review: 
+                        </td>
+                        <td>
+                            {{review.review}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Stars: 
+                        </td>
+                        <td>
+                            {{review.stars}}
+                        </td>
+                    </tr>
+                        {% if userid == review.user.id %}
+                         <tr>
+                             <td>
+                                <span class="make_small">option:</span>
+                             </td>
+                             <td>
+                                 <span class="make_small"><a href="/delete/{{review.id}}" type="hidden">delete</a></span>
+                             </td>
+                         </tr>
+                        {% endif%}
+                    {% endfor %}
+                </table>
+            {% endif %}
+        </div>
+        <!-- {% if request.session.notyourtrips %}
+        <h1>Server Wide Schedules</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Destination
+                        </th>
+                        <th>
+                            Travel Start Date
+                        </th>
+                        <th>
+                            Travel End Date
+                        </th>
+                        <th>
+                            Do you want to join?
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for trip in request.session.notyourtrips%}
+                        <tr>
+                            <td>
+                                {{trip.name}}
+                            </td>
+                            <td>
+                                {{trip.destination}}
+                            </td>
+                            <td>
+                                {{trip.date_from}}
+                            </td>
+                            <td>
+                                {{trip.date_to}}
+                            </td>
+                            <td>
+                                <a href="/add/inaCoolway"></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+        <a href="/travels/add">Add Travel Plan</a> -->
+    </div>
+</body>
+</html>

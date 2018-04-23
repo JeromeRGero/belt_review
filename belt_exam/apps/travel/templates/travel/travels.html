@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'travel/css/main.css' %}" media="screen" title="no title"  charset="utf-8">
+</head>
+<body>
+    <div id="wrapper">
+        <div id="first_wrap">
+            <h1 style="text-align: center; border: 1px solid lightgray">Hello {{ request.session.name }}</h1>
+            <a href="/logout" style="float: right;">Logout</a>
+            <h3 style="padding-top: 20px;">Your Trip Schedules:</h3>
+            <table id="maintable">
+                <thead>
+                    <tr>
+                        <th>
+                            Destination
+                        </th>
+                        <th>
+                            Travel Start Date
+                        </th>
+                        <th>
+                            Travel End Date
+                        </th>
+                        <th>
+                            Plan
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if request.session.usertrips %}
+                    {% for trip in request.session.usertrips %}
+                    <tr>
+                        <td>
+                            <a href="/travels/destination/{{trip.id}}">{{trip.destination}}</a>
+                        </td>
+                        <td>
+                            {{trip.date_from}}
+                        </td>
+                        <td>
+                            {{trip.date_to}}
+                        </td>
+                        <td>
+                            {{trip.desc}}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+            <br>
+            {% if request.session.notyourtrips %}
+            <h1>Server Wide Schedules</h1>
+            <!-- <form action="/main/reg" method="POST">
+                {% csrf_token %} -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Destination
+                            </th>
+                            <th>
+                                Travel Start Date
+                            </th>
+                            <th>
+                                Travel End Date
+                            </th>
+                            <th>
+                                Do you want to join?
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for trip in request.session.notyourtrips%}
+                            <tr>
+                                <td>
+                                    {{trip.name}}
+                                </td>
+                                <td>
+                                    {{trip.destination}}
+                                </td>
+                                <td>
+                                    {{trip.date_from}}
+                                </td>
+                                <td>
+                                    {{trip.date_to}}
+                                </td>
+                                <td>
+                                    <a href="/add/inaCoolway"></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            <!-- </form> -->
+            {% endif %}
+            <a href="/travels/add">Add Travel Plan</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'main/css/main.css' %}" media="screen" title="no title"  charset="utf-8">
+</head>
+<body>
+    <div id="wrapper">
+        <h1 style="text-align: center; margin: 0px auto; border: 1px solid lightgray">BeltReview.com</h1>
+        <a href="/logout" style="float: right;">Logout</a>
+        <h3 style="padding-top: 20px;">Add a trip!</h3>
+        <div id="first_wrap">
+            <form action="/books/add/adding" method="POST">
+                {% csrf_token %}
+                <table id="add_table">
+                    <tr>
+                        <td>
+                            <p>Book Title:</p>
+                        </td>
+                        <td>
+                            <input type="text" name="title">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Author:</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="make_small">Choose from the list</span>
+                        </td>
+                        <td>
+                            <select name="author">
+                                {% for author in authors %}
+                                    <option value="{{author.id}}">{{author.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="make_small">Or add a new author</span>
+                        </td>
+                        <td>
+                            <input type="text" name="new_author">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Review:</p>
+                        </td>
+                        <td>
+                            <textarea name="review" id="review" cols="70" rows="10"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Rating:</p>
+                        </td>
+                        <td>
+                            <select name="rating" id="rating">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+                        <td>
+                            Starts!
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <input type="submit" value="Add Book and Review" name="add" style="float: right;">
+            </form>
+            <br><br>
+            {{ request.session.error }}
+        </div>
+    </div>
+</body>
+</html>

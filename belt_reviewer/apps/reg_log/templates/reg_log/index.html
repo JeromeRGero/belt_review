@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'travel/css/main.css' %}" media="screen" title="no title"  charset="utf-8">
+</head>
+<body>
+    <div id="wrapper">
+        <div id="first_wrap">
+            <h1 style="text-align: center; border: 1px solid lightgray">Do You like Books?<br>Yeah Me too (dot) Com.</h1>
+            <h3>Register</h3>
+            <form action="/register" method="POST">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>
+                            <p>First Name:</p>
+                        </td>
+                        <td>
+                            <input type="text" name="first_name">
+                        </td>
+                        <td>
+                            {{ request.session.errors.first_name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Last Name:</p>
+                        </td>
+                        <td>
+                            <input type="text" name="last_name">
+                        </td>
+                        <td>
+                            {{ request.session.errors.last_name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Email:</p>
+                        </td>
+                        <td>
+                            <input type="text" name="email">
+                        </td>
+                        <td>
+                            {{ request.session.errors.email }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Password:</p>
+                        </td>
+                        <td>
+                            <input type="password" name="password">
+                        </td>
+                        <td>
+                            {{ request.session.errors.password }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Confirm:</p>
+                        </td>
+                        <td>
+                            <input type="password" name="confirm">
+                        </td>
+                        <td>
+                            {{ request.session.errors.confirm }}
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <input type="submit" value="Register" name="register" class="mainbutton">
+            </form>
+            <br><br>
+            <h3>OR...</h3><br>
+            <h1>Login</h1>
+            <form action="/login" method="POST">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>
+                            <p>Email:</p>
+                        </td>
+                        <td>
+                            <input type="text" name="email">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Password:</p>
+                        </td>
+                        <td>
+                            <input type="password" name="passowrd">
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <input type="submit" value="Login" name="login" class="mainbutton">
+            </form>
+        </div>
+        <!-- <div id="second_wrap">
+            <form action="/session_words/clear" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="Clear Session">
+            </form>
+            
+            <div id="word_box">
+                {% for word in request.session.ppack %}
+                    <p style="color: {{word.color}}; font-size: {{word.size}};">{{word.word}}</p>
+                {% endfor %}
+            </div>
+        </div> -->
+    </div>
+
+</body>
+</html>

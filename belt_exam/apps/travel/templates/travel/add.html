@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'travel/css/main.css' %}" media="screen" title="no title"  charset="utf-8">
+</head>
+<body>
+    <div id="wrapper">
+        <div id="first_wrap">
+            <h1 style="text-align: center; border: 1px solid lightgray">TravelWithFriends.com</h1>
+            <a href="/logout" style="float: right;">Logout</a>
+            <h3 style="padding-top: 20px;">Add a trip!</h3>
+            <form action="/adding" method="POST">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>
+                            <p>Destination:</p>
+                        </td>
+                        <td>
+                            <input type="text" name="destination">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Description:</p>
+                        </td>
+                        <td>
+                            <input type="text" name="desc">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Travel Date from:</p>
+                        </td>
+                        <td>
+                            <input type="date" name="date_from">
+                        </td>
+                        <td>
+                            {{ request.session.error.datefrom }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Travel Date to:</p>
+                        </td>
+                        <td>
+                            <input type="date" name="date_to">
+                        </td>
+                        <td>
+                            {{ request.session.error.dateto }}
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <input type="submit" value="Add" name="add" style="float: right;">
+            </form>
+            <br><br>
+            {{ request.session.error }}
+        </div>
+    </div>
+</body>
+</html>

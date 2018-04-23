@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'travel/css/main.css' %}" media="screen" title="no title"  charset="utf-8">
+</head>
+<body>
+    <div id="wrapper">
+        <div id="first_wrap">
+            <h1 style="text-align: center; border: 1px solid lightgray">TravelWithFriends.com</h1>
+            <h3 style="padding-top: 20px;">Register</h3>
+            <form action="/main/reg" method="POST">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>
+                            <p>Name:</p>
+                        </td>
+                        <td>
+                            <input type="text" name="full_name">
+                        </td>
+                        <td>
+                            {{ request.session.errors.full_name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Username:</p>
+                        </td>
+                        <td>
+                            <input type="text" name="username">
+                        </td>
+                        <td>
+                            {{ request.session.errors.username }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Password:</p>
+                        </td>
+                        <td>
+                            <input type="password" name="password">
+                        </td>
+                        <td>
+                            {{ request.session.errors.password }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Confirm:</p>
+                        </td>
+                        <td>
+                            <input type="password" name="confirm">
+                        </td>
+                        <td>
+                            {{ request.session.errors.confirm }}
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <input type="submit" value="Register" name="register" class="mainbutton">
+            </form>
+            <br><br>
+            <h3 style="text-align: center;">OR...</h3><br>
+            <h3>Login</h3>
+            <form action="/main/login" method="POST">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>
+                            <p>Username:</p>
+                        </td>
+                        <td>
+                            <input type="text" name="username">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Password:</p>
+                        </td>
+                        <td>
+                            <input type="password" name="password">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{request.session.LOGerror}}</td>
+                    </tr>
+                </table>
+                <br>
+                <input type="submit" value="Login" name="login" class="mainbutton">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+*{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+
+#wrapper{
+    width: 602px;
+    margin: 0px auto;
+    border: 1px solid lightgray;
+    min-height: 300px;
+}
+
+#first_wrap{
+    vertical-align: top;
+    display: inline-block;
+    float: left;
+    width: 300px;
+}
+
+#second_wrap{
+    vertical-align: top;
+    display: inline-block;
+    width: 300px;
+    border-left: 1px solid lightgray;
+}

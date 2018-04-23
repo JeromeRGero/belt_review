@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <title></title>
+        {% load static %}
+      <!-- The line above tells Django to be ready to listen for static files -->
+      <link rel="stylesheet" href="{% static 'session_words/css/main.css' %}" media="screen" title="no title"  charset="utf-8">
+      <!-- Put the static files in the static folder inside your app.  Django collects files within all static folders and puts them within a single folder -->
+      </head>
+    <body>
+        <div id="wrapper">
+            <div id="first_wrap">
+                <h1>Session Words</h1>
+                <h1></h1>
+                <form action="/session_words/add" method="POST">
+                    {% csrf_token %}
+                    <p>Add a new word:</p>
+                    <input type="text" name="word">
+                    <p>Select a Color</p>
+                    <select name="color" name="color" id="color_select">
+                        <option value="red">Red</option>
+                        <option value="green">Green</option>
+                        <option value="blue">Blue</option>
+                    </select>
+                    <br><br>
+                    <input type="checkbox" name="big">I want the text to be LARGE!
+                    <br>
+                    <input type="submit" value="Add to Session" name="reset">
+                </form>
+            </div>
+            <div id="second_wrap">
+                <form action="/session_words/clear" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="Clear Session">
+                </form>
+                
+                <div id="word_box">
+                    {% for word in request.session.ppack %}
+                        <p style="color: {{word.color}}; font-size: {{word.size}};">{{word.word}}</p>
+                    {% endfor %}
+                </div>
+        
+            </div>
+        </div>
+
+    </body>
+  </html>
